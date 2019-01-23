@@ -4,8 +4,8 @@ in the context of TWO-DIMENSIONAL GRAPHICS.
 
 Authors: David Mutchler, Vibha Alangar, Matt Boutell, Dave Fisher,
          Mark Hays, Amanda Stouder, Aaron Wilkin, their colleagues,
-         and PUT_YOUR_NAME_HERE.
-"""  # TODO: 1. PUT YOUR NAME IN THE ABOVE LINE.
+         and Shixin Wu.
+"""  # done: 1. PUT YOUR NAME IN THE ABOVE LINE.
 
 import rosegraphics as rg
 
@@ -50,9 +50,60 @@ def draw_upside_down_wall(rectangle, n, window):
     and n is nonnegative.
     """
     # -------------------------------------------------------------------------
-    # TODO: 2. Implement and test this function.
+    # done: 2. Implement and test this function.
     #     Some tests are already written for you (above).
     # -------------------------------------------------------------------------
+    # c1x=rectangle.corner_1.x
+    # c1y=rectangle.corner_1.y
+    # c2x=rectangle.corner_2.x
+    # c2y=rectangle.corner_2.y
+    # w=c2x-c1x
+    # h=c1y-c2y
+    # oric1x=c1x
+    # oric1y=c1y
+    # oric2x=c2x
+    # oric2y=c2y
+    # for k in range (n):
+    #     for j in range (n-k):
+    #         rec=rg.Rectangle(rg.Point(c1x,c1y),rg.Point(c2x,c2y))
+    #         rec.attach_to(window.initial_canvas)
+    #         window.render()
+    #
+    #
+    #         c1x = c1x + c2x
+    #         c2x = c2x + c2x
+    #     c1x=oric1x+0.5*c2x
+    #     c2x=oric2x+0.5*c2x
+    #     c1y=oric1y+h
+    #     c2y=oric2y+h
+
+
+    oric1x = rectangle.corner_1.x
+    oric1y = rectangle.corner_1.y
+    oric2x = rectangle.corner_2.x
+    oric2y = rectangle.corner_2.y
+    h=oric2y-oric1y
+    w=oric2x-oric1x
+    #
+    x1=oric1x
+    y1=oric1y
+    x2=oric2x
+    y2=oric2y
+    for k in range(n):  # Loop through the rows
+        for _ in range(k+1):  # Loop through the columns
+            newrec = rg.Rectangle(rg.Point(x1,y1),rg.Point(x2,y2))
+            newrec.attach_to(window.initial_canvas)
+            window.render()
+
+            x1 = x1 + w
+            x2 = x2 + w
+
+        y1 = y1-h
+        y2 = y2- h# Move y down, for the next row of circles
+        x1 = oric1x-0.5*(k+1)*w
+        x2=oric2x-0.5*(k+1)*w# Reset x to the left-edge, for the next row
+
+
 
 
 # -----------------------------------------------------------------------------
